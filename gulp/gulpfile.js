@@ -10,12 +10,19 @@ const imageminJpg = require('imagemin-jpeg-recompress');
 const imageminPng = require('imagemin-pngquant');
 const imageminGif = require('imagemin-gifsicle');
 const mozjpeg  = require('imagemin-mozjpeg');
+const browserSync = require('browser-sync');
+
+const folderName = ".."
 
 // 圧縮前と圧縮後のディレクトリを定義
 const paths = {
   srcDir : 'src',// 圧縮前のディレクトリ
-  dstDir : '../assets'// 圧縮後のディレクトリ
+  dstDir : folderName+'/assets'// 圧縮後のディレクトリ
 }
+
+gulp.task('bs-reload', function () {
+  browserSync.reload();
+});
 
 //タスクの定義
 gulp.task("default", function() {
@@ -37,8 +44,22 @@ gulp.task("default", function() {
     ))
     .pipe(gulp.dest( dstGlob ));
     });
-  gulp.watch("./scss/style.scss", function(){
-    gulp.src("./scss/style.scss") //ファイルの参照先を指定
+    browserSync({
+      // proxy: "http://hirose.ballet/",
+      // files: [
+      //   "../**/*.css",
+      //   "../**/*.js",
+      //   "../**/*.php",
+      // ]
+      server: {
+         baseDir: folderName       //対象ディレクトリ
+        ,index  : "index.html"      //インデックスファイル
+      }
+    });
+  gulp.watch( folderName+"/*.html" ,['bs-reload']);
+  gulp.watch( folderName+"/css/*.css" ,['bs-reload']);
+  gulp.watch("./scss/*.scss", function(){
+    gulp.src("./scss/*.scss") //ファイルの参照先を指定
       .pipe(plumber())
       .pipe(sourcemaps.init())
       .pipe(sass({
