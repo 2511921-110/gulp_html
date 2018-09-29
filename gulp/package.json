@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "browser-sync": "^2.23.5",
+    "browser-sync": "^2.24.7",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-changed": "^3.2.0",
