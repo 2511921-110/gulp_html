@@ -12,6 +12,9 @@ const imageminGif = require('imagemin-gifsicle');
 const mozjpeg  = require('imagemin-mozjpeg');
 const browserSync = require('browser-sync');
 
+const webpackStream = require("webpack-stream");
+const webpack = require("webpack");
+
 const folderName = ".."
 
 // 圧縮前と圧縮後のディレクトリを定義
@@ -24,10 +27,14 @@ gulp.task('bs-reload', function () {
   browserSync.reload();
 });
 
+// webpackの設定ファイルの読み込み
+const webpackConfig = require("./webpack.config");
+
+
 //タスクの定義
 gulp.task("default", function() {
   // jpg,png,gif画像の圧縮タスク
-    var srcGlob = paths.srcDir + '/**/*.+(jpg|jpeg|png|gif)';
+    var srcGlob = paths.srcDir + '/**/*.+(jpg|jpeg|png|gif|svg)';
     var dstGlob = paths.dstDir;
     gulp.watch( srcGlob , function(){
     gulp.src( srcGlob )
@@ -45,21 +52,21 @@ gulp.task("default", function() {
     .pipe(gulp.dest( dstGlob ));
     });
     browserSync({
-      // proxy: "http://hirose.ballet/",
-      // files: [
-      //   "../**/*.css",
-      //   "../**/*.js",
-      //   "../**/*.php",
-      // ]
-      server: {
-         baseDir: folderName       //対象ディレクトリ
-        ,index  : "index.html"      //インデックスファイル
-      }
+      proxy: "http://localhost:8888/trip-call-btob/",
+      files: [
+        "../**/*.css",
+        "../**/*.js",
+        "../**/*.php",
+      ],
+      // server: {
+      //    baseDir: folderName       //対象ディレクトリ
+      //   ,index  : "index.html"      //インデックスファイル
+      // }
     });
-  gulp.watch( folderName+"/*.html" ,['bs-reload']);
+  gulp.watch( folderName+"/*.php" ,['bs-reload']);
   gulp.watch( folderName+"/css/*.css" ,['bs-reload']);
-  gulp.watch("./scss/*.scss", function(){
-    gulp.src("./scss/*.scss") //ファイルの参照先を指定
+  gulp.watch("scss/*.scss", function(){
+    gulp.src("scss/*.scss") //ファイルの参照先を指定
       .pipe(plumber())
       .pipe(sourcemaps.init())
       .pipe(sass({
@@ -70,6 +77,10 @@ gulp.task("default", function() {
       .pipe(sourcemaps.init({loadMaps: true}))
       .pipe(autoprefixer())
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest("../css")); //処理を行ったファイルの保存先を指定
+      .pipe(gulp.dest(folderName+"/css")); //処理を行ったファイルの保存先を指定
     });
+  gulp.watch("./js/*.js", function(){
+    return webpackStream(webpackConfig, webpack)
+      .pipe(gulp.dest(folderName+"/js"))
+  });
 });
