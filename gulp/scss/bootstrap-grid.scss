@@ -26,8 +26,17 @@ html {
 @import "mixins/breakpoints";
 @import "mixins/grid-framework";
 @import "mixins/grid";
+@import "mixins/text-emphasis";
+@import "mixins/text-truncate";
+@import "mixins/text-hide";
+@import "mixins/hover";
+@import "mixins/size";
+
 
 @import "grid";
 @import "utilities/display";
 @import "utilities/flex";
 @import "utilities/spacing";
+@import "utilities/text";
+@import "utilities/align";
+@import "utilities/sizing";

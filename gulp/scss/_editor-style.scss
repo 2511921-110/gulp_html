@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+$color-theme: #333;
+
+h2{
+  background-color: $color-theme;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: .5em .8em;
+  margin-top: 5em;
+  line-height: 1.5;
+}
+h3{
+  font-size: 1.3em;
+  font-weight: bold;
+  border-top: 2px solid $color-theme;
+  border-bottom: 2px solid $color-theme;
+  padding: .5em;
+  margin-top: 3em;
+  line-height: 1.5;
+}
+h4{
+  font-size: 110%;
+  font-weight: bold;
+  padding: .3em .5em;
+  border-left: 2px solid $color-theme;
+  margin-top: 2em;
+  line-height: 1.5;
+}
+h5{
+  font-weight: bold;
+  margin-top: 2em;
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+table{
+  margin: 1em 0em;
+}
+
+iframe{
+  max-width: 100%;
+}
+
+@media screen and (max-width: 640px) {
+  h1, h2, h3, h4, h5, h6, p, blockquote, address, big, cite, code, em, font, img, small, strike, sub, sup, li, ol, ul, fieldset, form, label, legend, button, table, caption, tr, th, td{
+    font-size: 90%;
+  }
+}
+
+blockquote{
+  background-color: #fafafa;
+  margin-top: 0px;
+  margin-bottom: 1em;
+  padding: 1em;
+  font-size: 16px;
+  padding-right: 2.5em;
+  p{
+    font-size: 1em;
+  }
+  &:before{
+    font-size: 32px;
+    width: 1.5em;
+    height: 2em;
+    top: 16px;
+  }
+}
+
+@mixin marker($color) {
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 50%,
+    $color      51%,
+    $color      100%
+    );
+}
+
+.marker{
+  &-yellow{ @include marker(yellow); }
+  &-pink{ @include marker(#ffaafe); }
+  &-water{ @include marker(#aafdff); }
+  &-lime{ @include marker(#adff60); }
+}
+
+
+@mixin box($color, $text: $color-theme) {
+  border-color: $color;
+  background-color: rgba($color, .1);
+  .box-title{
+    background-color: $color;
+    color: $text;
+  }
+}
+
+.box{
+  padding: 2em 1em 1em;
+  border: 5px solid #eee;
+  position: relative;
+  margin-bottom: 2em;
+  &-title{
+    position: absolute;
+    left: 1em;
+    top: -1em;
+    padding: .2em .5em;
+    font-weight: bold;
+    margin: 0px;
+  }
+  &-water{ @include box(#aafdff); }
+  &-red{ @include box(#ff2e2e, white); }
+  &-gray{ @include box(#999, white); }
+  &-lime{ @include box(#adff60); }
+}
+
+.text{
+  &-large{
+    font-size: 110% !important;
+  }
+  &-small{
+    font-size: 80% !important;
+  }
+}
