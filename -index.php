@@ -5,6 +5,6 @@
   <title>香里園レジデンス歯科高品質インプラント</title>
 </head>
 <body>
-  testHTML
+  testPHP
 </body>
 </html>

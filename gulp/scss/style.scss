@@ -1,0 +1,643 @@
+@charset "UTF-8";
+
+@import '_reset';
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400;700&display=swap');
+// font-family:'Noto Sans JP',"Gadugi","Arial","ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "メイリオ" , Meiryo ,"Meiryo UI" , Verdana , Roboto , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+// font-wight 100 400 700
+
+/*color*/
+$color-theme: #ce0613;
+$color-sub: #160804;
+$color-base: white;
+$color-text: #000;
+$color-accent: #ce0613;
+
+/*font*/
+//$gothic_fonts: 'Noto Serif', 游明朝,"Yu Mincho",YuMincho,"Hiragino Mincho ProN",HGS明朝E,メイリオ,Meiryo,serif;
+$gothic_fonts: 'Noto Sans JP', 'Gadugi', 'Arial', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro',
+  'メイリオ', Meiryo, 'Meiryo UI', Verdana, Roboto, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+// $mincho_fonts: 'NotoSans-M' ,YuGothic,"ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+$mincho_fonts: 游明朝, 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', HGS明朝E, メイリオ, Meiryo,
+  serif;
+
+/*font size*/
+@mixin font-size($size, $base: 16) {
+  font-size: $size + px;
+  font-size: ($size / $base) * 1rem;
+}
+
+/*font関連*/
+@mixin mincho {
+  font-family: $mincho_fonts;
+}
+@mixin gothic {
+  font-family: $gothic_fonts;
+}
+
+@mixin border($v, $c: $color-sub, $a: 0.25) {
+  @if $v == b {
+    border-bottom: 1px solid rgba($c, $a);
+  } @else if $v == t {
+    border-top: 1px solid rgba($c, $a);
+  } @else if $v == l {
+    border-left: 1px solid rgba($c, $a);
+  } @else if $v == r {
+    border-right: 1px solid rgba($c, $a);
+  } @else if $v == all {
+    border: 1px solid rgba($c, $a);
+  }
+}
+
+@mixin text-shadow($v: #fff) {
+  text-shadow: $v 1px 1px 0, $v -1px -1px 0, /*右下、左上*/ $v -1px 1px 0, $v 1px -1px 0,
+    /*右上、左下*/ $v 0px 1px 0, $v 0-1px 0, /*右、左*/ $v -1px 0 0, $v 1px 0 0; /*上、下*/
+}
+
+.mont {
+  font-family: 'Montserrat', sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  font-size: 16px;
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    font-size: 11px;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+body {
+  @include font-size(16);
+  font-family: $gothic_fonts;
+  line-height: 1.7;
+  color: $color-text;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 1em 0;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   margin: 0;
+// }
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    // font-size:#{$i}px;
+    margin: 0;
+    font-weight: bold;
+  }
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+address {
+  font-style: normal;
+}
+
+/*汎用型*/
+table {
+  width: 100%;
+  font-size: 100%;
+  box-sizing: border-box;
+  tbody {
+    tr {
+      th,
+      td {
+        padding: 5px 3px;
+        border-bottom: solid 1px #ddd;
+        @media screen and (max-width: 375px) {
+          display: block;
+          width: 100px;
+        }
+      }
+      th {
+        @media screen and (min-width: 769px) {
+          white-space: nowrap;
+          padding-right: 2em;
+        }
+      }
+    }
+  }
+}
+
+figure {
+  margin: 0;
+  line-height: 0;
+}
+
+figcaption {
+  line-height: 1.7;
+}
+
+dd {
+  margin-left: 0;
+}
+
+/* iOSでのデフォルトスタイルをリセット */
+input[type='submit'],
+input[type='button'] {
+  border-radius: 0;
+  -webkit-box-sizing: content-box;
+  -webkit-appearance: button;
+  appearance: button;
+  border: none;
+  box-sizing: border-box;
+  &::-webkit-search-decoration {
+    display: none;
+  }
+  &::focus {
+    outline-offset: -2px;
+  }
+}
+
+a {
+  color: $color-text;
+  text-decoration: none;
+  &:hover {
+    color: lighten($color-sub, 40);
+    img {
+      opacity: 0.7;
+    }
+  }
+}
+
+/*******************************
+  コンテンツ幅
+*******************************/
+.container {
+  &__min {
+  }
+  &__large {
+  }
+}
+
+@media screen and (min-width: 429px) {
+  // iphone 12 Proよりも大きい場合
+}
+@media screen and (min-width: 769px) {
+  // ipadの縦表示よりも大きい場合
+}
+@media screen and (max-width: 768px) {
+  // ipadの縦表示以下の場合
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  //iPadの縦と横までの間のサイズ
+}
+
+/*******************************
+  nav
+*******************************/
+.menu__btnwrap {
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: block;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 6;
+    text-align: center;
+    background-color: rgba($color-theme, 0.7);
+    color: $color-base;
+    padding: 5px;
+    line-height: 1.3;
+  }
+}
+.spmenu_btn {
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    width: 45px;
+    height: 25px;
+    margin-bottom: 5px;
+    &:hover {
+      cursor: pointer;
+    }
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 100%;
+      background-color: $color-base;
+      transition: all 0.3s;
+      position: absolute;
+    }
+    &::before {
+      left: 0px;
+      top: 0px;
+    }
+    &::after {
+      left: 0px;
+      bottom: 0px;
+    }
+    span {
+      display: block;
+      height: 1px;
+      width: 100%;
+      background-color: $color-base;
+      transition: all 0.3s;
+    }
+    &Close {
+      span {
+        width: 0;
+      }
+      &::before,
+      &::after {
+        transform-origin: center;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        position: absolute;
+        width: 100%;
+      }
+      &::before {
+        transform: rotate(45deg);
+      }
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+.globalNav {
+  @media screen and (max-width: 768px) {
+    display: flex;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    right: -100vw;
+    transition: all 0.4s;
+    z-index: 5;
+    top: 0;
+    background-color: $color-base;
+    &_state {
+      right: 0;
+    }
+    .menu {
+      width: 100%;
+      &-item {
+        width: 100%;
+      }
+      a {
+        display: block;
+        padding: 1em;
+      }
+      li {
+        @include border(b);
+      }
+    }
+    .menu-globalnav-container {
+      width: 100%;
+      display: flex;
+      align-content: center;
+    }
+  }
+}
+
+/*******************************
+  header
+*******************************/
+
+// #header{
+//   transition: all .4s;
+//   &.active{
+//     position: fixed;
+//     width: 100%;
+//     top: -120px;
+//     transition: all .4s;
+//     z-index: 4;
+//     &.in-view{
+//       top: 0;
+//     }
+//   }
+// }
+
+/*******************************
+  footer
+*******************************/
+.footer {
+}
+
+/*******************************
+  title
+*******************************/
+.title {
+}
+
+/*******************************
+  text
+*******************************/
+
+/*******************************
+  btn
+*******************************/
+
+/*******************************
+  table
+*******************************/
+
+/*******************************
+  background
+*******************************/
+
+/*******************************
+  border
+*******************************/
+
+/*******************************
+  slider
+*******************************/
+
+/*******************************
+  map
+*******************************/
+
+/*******************************
+  SNS関連
+*******************************/
+
+/*******************************
+  single
+*******************************/
+
+/*******************************
+  archive
+*******************************/
+.pagination {
+  ul {
+    display: flex;
+  }
+  li {
+    @include font-size(16);
+    margin-right: 0.6rem;
+    &.active {
+      background-color: $color-theme;
+      color: $color-base;
+      padding: 0.3rem 0.7rem;
+    }
+    a {
+      display: block;
+      color: $color-text;
+      padding: 0.3rem 0.7rem;
+    }
+  }
+}
+
+/*******************************
+  aside
+*******************************/
+
+/*******************************
+  lightbox
+*******************************/
+
+/*******************************
+  form
+*******************************/
+.mw_wp_form {
+  tr {
+    &:first-child {
+      th,
+      td {
+        border-top: none;
+      }
+    }
+  }
+  th,
+  td {
+    border-bottom: 1px solid rgba(#947838, 0.6);
+    text-align: left;
+    vertical-align: top;
+    white-space: inherit;
+    position: relative;
+    @media screen and (max-width: 768px) {
+      display: block;
+      width: 100%;
+    }
+  }
+  th {
+    @media screen and (min-width: 769px) {
+      white-space: nowrap;
+      width: 320px;
+    }
+  }
+  .required {
+    @include font-size(14);
+    font-weight: bold;
+    color: $color-text;
+    background-color: $color-theme;
+    display: inline-block;
+    margin-left: 1.5rem;
+    padding: 0 0.6rem;
+  }
+  input {
+    &[type='text'],
+    &[type='email'],
+    &[type='number'],
+    &[type='tel'] {
+      font-size: 16px;
+      padding: 0.4rem 0.6rem;
+      margin-bottom: 0.3rem;
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  select {
+    font-size: 16px;
+    padding: 0.4rem 0.6rem;
+    display: inline-block;
+    border-radius: 0;
+    @media screen and (min-width: 769px) {
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      padding: 0.6em 1.5em 0.6em 0.5em;
+      background-image: linear-gradient(45deg, transparent 50%, rgba(0, 0, 0, 0.4) 50%),
+        linear-gradient(135deg, rgba(0, 0, 0, 0.4) 50%, transparent 50%);
+      background-size: 5px 5px, 5px 5px;
+      background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
+      background-repeat: no-repeat;
+      &:focus {
+        outline: 0;
+        border-color: #b0c5ff; /* 枠線の色を変更 */
+      }
+      &::-ms-expand {
+        display: none;
+      }
+    }
+  }
+  textarea {
+    font-size: 16px;
+    padding: 0.4rem 0.6rem;
+    width: 100%;
+  }
+  .error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-25px);
+    background-color: red;
+    color: white !important;
+    @include font-size(10);
+    display: inline-block;
+    padding: 0.3rem 0 0.3rem 0.4rem;
+    border-radius: 5px;
+    animation: float 2s ease 0s infinite;
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      content: '';
+      width: 14px;
+      display: block;
+      border-top: 5px solid red;
+      border-right: 7px solid transparent;
+      border-left: 7px solid transparent;
+      transform: translateY(5px);
+    }
+  }
+  input,
+  select,
+  textarea {
+    &:focus {
+      & + .error {
+        // display: none;
+      }
+    }
+  }
+  .submit,
+  .return {
+    display: inline-block;
+    border: none;
+    @include font-size(18);
+    padding: 0.5rem 0.7rem;
+    &:focus {
+      outline: 0;
+      border-color: #b0c5ff; /* 枠線の色を変更 */
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .submit {
+    background-color: $color-theme;
+    color: $color-text;
+  }
+  .return {
+    background-image: url('../assets/bg-pattern.png');
+    background-color: $color-sub;
+    color: $color-text;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(-25px);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(-25px);
+  }
+}
+
+/*******************************
+  accordion
+*******************************/
+.accordion {
+  &__title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    &::after {
+      content: '\f078';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      transition: all 0.3s;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &.open {
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  &__content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    line-height: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: padding 0.36s, opacity 0.36s;
+    &.is-open {
+      padding: 0.6em 1em;
+      line-height: normal;
+      height: auto;
+      opacity: 1;
+    }
+  }
+}
+
+/*******************************
+  サイト固有
+*******************************/
+
+@media screen and (min-width: 429px) {
+  // iphone 12 Proよりも大きい場合
+}
+@media screen and (min-width: 769px) {
+  // ipadの縦表示よりも大きい場合
+}
+@media screen and (max-width: 768px) {
+  // ipadの縦表示以下の場合
+}
