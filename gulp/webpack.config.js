@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',//production
+  mode: 'development',//production development
   // エントリーポイントの設定
   entry: './js/app.js',
   // 出力の設定
@@ -11,8 +11,8 @@ module.exports = {
     // 出力先のパス（v2系以降は絶対パスを指定する必要がある）
     path: path.join(__dirname, 'js')
   },
-  module:{
-    rules:[{
+  module: {
+    rules: [{
       test: /\.js$/,
       exclude: /node_modules/,
       loader: [
@@ -39,7 +39,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-    // vue.js のビルドを指定する
+      // vue.js のビルドを指定する
       vue: 'vue/dist/vue.js',
       // slick: 'slick-carousel/slick/',
     }
