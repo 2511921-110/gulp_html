@@ -32,7 +32,7 @@
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-pngquant": "^8.0.0",
     "jquery": "^3.5.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-reset-scss": "^1.0.1",
     "node-sass": "^4.12.0",
     "pngquant": "^3.0.0",
